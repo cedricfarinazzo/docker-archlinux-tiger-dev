@@ -3,7 +3,7 @@ LABEL authors="Cédric Farinazzo <cedric.farinazzo@gmail.com>"
 
 # Install dependencies
 RUN pacman --noconfirm -Sy && \
-    pacman --noconfirm -S wget curl git gcc clang make autoconf automake \
+    pacman --noconfirm -S wget curl git gcc gcc-libs lib32-gcc-libs clang make autoconf automake \
                         flex bison gettext python \
                         boost boost-libs llvm libffi \
                         valgrind doxygen ocaml && yes | pacman -Scc
