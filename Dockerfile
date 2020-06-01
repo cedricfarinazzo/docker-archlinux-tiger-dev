@@ -37,4 +37,11 @@ RUN git clone https://gitlab.lrde.epita.fr/tiger/monoburg.git /tmp/monoburg && \
     make -j4 && make install && \
     cd - && rm -rf /tmp/monoburg
 
+# Install nolimips
+RUN git clone https://gitlab.lrde.epita.fr/tiger/nolimips.git /tmp/nolimips && \
+    cd /tmp/nolimips && \
+    $PWD/bootstrap && $PWD/configure --prefix=/usr && \
+    make -j4 && make install && \
+    cd - && rm -rf /tmp/nolimips
+
 ENTRYPOINT /bin/bash
