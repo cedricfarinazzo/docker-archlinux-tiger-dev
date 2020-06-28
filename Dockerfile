@@ -32,6 +32,46 @@ RUN wget https://www.lrde.epita.fr/~tiger/download/bison-3.2.1.52-cd4f7.tar.gz -
 # Install aur dependencies
 RUN sudo -u user yay -S --cleanafter --noconfirm --removemake \
                         --mflags --nocheck havm-epita \
-                            monoburg-git nolimips-git
+                            monoburg-git nolimips-git && yes | pacman -Scc
+
+RUN sudo -u user yay -S --cleanafter --noconfirm --removemake \
+                        --mflags --nocheck \
+                        qemu-arch-extra patch\
+                        && yes | pacman -Scc
+
+RUN sudo -u user yay -S --cleanafter --noconfirm --removemake \
+                        --mflags --nocheck \
+                        arm-linux-gnueabihf-binutils \
+                        && yes | pacman -Scc
+
+RUN sudo -u user yay -S --cleanafter --noconfirm --removemake \
+                        --mflags --nocheck \
+                        arm-linux-gnueabihf-gcc-stage1 \
+                        && yes | pacman -Scc
+
+RUN sudo -u user yay -S --cleanafter --noconfirm --removemake \
+                        --mflags --nocheck \
+                        arm-linux-gnueabihf-linux-api-headers \
+                        && yes | pacman -Scc
+
+RUN sudo -u user yay -S --cleanafter --noconfirm --removemake \
+                        --mflags --nocheck \
+                        arm-linux-gnueabihf-glibc-headers \
+                        && yes | pacman -Scc
+
+RUN sudo -u user yay -S --useask --cleanafter --noconfirm --removemake \
+                        --mflags --nocheck \
+                        arm-linux-gnueabihf-gcc-stage2 \
+                        && yes | pacman -Scc
+
+RUN sudo -u user yay -S --useask --cleanafter --noconfirm --removemake \
+                        --mflags --nocheck \
+                        arm-linux-gnueabihf-glibc \
+                        && yes | pacman -Scc
+
+RUN sudo -u user yay -S --useask --cleanafter --noconfirm --removemake \
+                        --mflags --nocheck \
+                        arm-linux-gnueabihf-gcc \
+                        && yes | pacman -Scc
 
 ENTRYPOINT /bin/bash
